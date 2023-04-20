@@ -32,11 +32,39 @@
     }
 </style>
 <script>
+    i = 1;
     $(document).ready(function(){
         $("#btnModal").click(() => {
             $("#myModal").modal();
         })
     })
+    $(document).ready(function(){
+      $("#myModal form").submit(function(event) {
+        event.preventDefault(); // Ngăn chặn việc submit form
+    
+        var formData = $(this).serialize(); // Lấy giá trị của form
+    
+        var dataObj = {}; // Tạo đối tượng JSON
+    
+        formData.split('&').forEach(function(keyValue) { // Tách giá trị thành các cặp key-value
+          var pair = keyValue.split('=');
+          dataObj[pair[0]] = decodeURIComponent(pair[1] || ''); // Thêm key-value vào đối tượng JSON
+        });
+    
+        var newRow = '<tr>' + 
+                       '<td>' + ++i + '</td>' +
+                       '<td>' + dataObj['txtMa'] + '</td>' +
+                       '<td>' + dataObj['txtMK'] + '</td>' +
+                       '<td>' + dataObj['date'] + '</td>' +
+                       '<td>200000</td>' +
+                       '<td>' + $('#sel1 option:selected').text() + '</td>' +
+                     '</tr>'; // Tạo chuỗi HTML cho một hàng mới
+    
+        $('table tbody').append(newRow); // Chèn hàng mới vào bảng
+        $('#myModal').modal('hide'); // Đóng modal
+      });
+    });
+    
 </script>
 <body>
     <div class="container">
@@ -62,9 +90,9 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>11</td>
-                    <td>123456a</td>
+                    <td>1</td>
                     <td>BN-012345</td>
+                    <td>123456a</td>
                     <td>12/8/2020</td>
                     <td>100000</td>
                     <td>Ngoại tổng quát</td>
@@ -92,7 +120,7 @@
                         </div>
                         <div class="form-group">
                             <label for="date">Ngày khám</label>
-                            <input type="date" class="form-control" name="txtMK" id="date" placeholder="mm/dd/yyyy" required>
+                            <input type="date" class="form-control" name="date" id="date" placeholder="mm/dd/yyyy" required>
                         </div>
                         <div class="form-check-inline">
                             <label for="form-check-label">
