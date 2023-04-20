@@ -21,8 +21,14 @@
     .display-4{
         background-color: aquamarine;
     }
+    .modal-dialog{
+        max-width: 800px;
+    }
     #btnModal:active{
         color: rgb(18, 45, 45);
+    }
+    label:not(:has(input)){
+        font-weight: bold;
     }
 </style>
 <script>
@@ -75,7 +81,45 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    Form....
+                    <form action="" method="get">
+                        <div class="form-group">
+                            <label for="maBenhNhan">Mã bệnh nhân</label>
+                            <input type="text" class="form-control" name="txtMa" id="maBenhNhan" placeholder="Ma benh nhan" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="matKhau">Mật khẩu</label>
+                            <input type="text" class="form-control" name="txtMK" id="matKhau" placeholder="Mat khau" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Ngày khám</label>
+                            <input type="date" class="form-control" name="txtMK" id="date" placeholder="mm/dd/yyyy" required>
+                        </div>
+                        <div class="form-check-inline">
+                            <label for="form-check-label">
+                                <input type="checkbox" name="" id="" class="form-check-input" value=""> Khám bệnh theo yêu cầu 
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label for="form-check-label">
+                                <input type="checkbox" name="" id="" class="form-check-input" value=""> Điều trị ngoại trú 
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label for="form-check-label">
+                                <input type="checkbox" name="" id="" class="form-check-input" value=""> Bác sĩ theo yêu cầu 
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="sel1">Chuyên khoa</label>
+                            <select class="form-control" id="sel1">
+                              <option>Ngoại tổng quát</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-info text-white p-2">Đặt lịch</button>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-info" data-dismiss="modal"> Close</button>
