@@ -1,72 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giai Thi Mau Cuoi Ki</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/index.css">
     <script src="../js/jquery-3.6.4.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/index.js"></script>
 </head>
-<style>
-    .img{
-        background-image: url(../img/background.jpeg);
-        background-repeat: repeat;
-        background-size: auto;
-        height: 250px;
-        width: 100%;
 
-    }
-    .display-4{
-        background-color: aquamarine;
-    }
-    .modal-dialog{
-        max-width: 800px;
-    }
-    #btnModal:active{
-        color: rgb(18, 45, 45);
-    }
-    label:not(:has(input)){
-        font-weight: bold;
-    }
-</style>
-<script>
-    i = 1;
-    $(document).ready(function(){
-        $("#btnModal").click(() => {
-            $("#myModal").modal();
-        })
-    })
-    $(document).ready(function(){
-      $("#myModal form").submit(function(event) {
-        event.preventDefault(); // Ngăn chặn việc submit form
-    
-        var formData = $(this).serialize(); // Lấy giá trị của form
-    
-        var dataObj = {}; // Tạo đối tượng JSON
-    
-        formData.split('&').forEach(function(keyValue) { // Tách giá trị thành các cặp key-value
-          var pair = keyValue.split('=');
-          dataObj[pair[0]] = decodeURIComponent(pair[1] || ''); // Thêm key-value vào đối tượng JSON
-        });
-    
-        var newRow = '<tr>' + 
-                       '<td>' + ++i + '</td>' +
-                       '<td>' + dataObj['txtMa'] + '</td>' +
-                       '<td>' + dataObj['txtMK'] + '</td>' +
-                       '<td>' + dataObj['date'] + '</td>' +
-                       '<td>200000</td>' +
-                       '<td>' + $('#sel1 option:selected').text() + '</td>' +
-                     '</tr>'; // Tạo chuỗi HTML cho một hàng mới
-    
-        $('table tbody').append(newRow); // Chèn hàng mới vào bảng
-        $('#myModal').modal('hide'); // Đóng modal
-      });
-    });
-    
-</script>
 <body>
+    <div id="success-alert">Đăng lịch thành công</div>
     <div class="container">
         <div class="img position-relative d-flex justify-content-center align-items-center border">
             <div class="display-4 text-primary position-absolute text-center">Tư Vấn Online</div>
@@ -91,15 +39,15 @@
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td>BN-012345</td>
+                    <td>BN-12345</td>
                     <td>123456a</td>
-                    <td>12/8/2020</td>
-                    <td>100000</td>
+                    <td>12/08/2020</td>
+                    <td>1000000</td>
                     <td>Ngoại tổng quát</td>
                 </tr>
             </tbody>
         </table>
-        <div class="text-center border p-5" style="font-size: xx-large;">21090331 - LeHoangBao</div>
+        <div class="text-center border p-5" style="font-size: x-large;">21090331 - LeHoangBao</div>
     </div>
     <div class="modal" id="myModal">
         <div class="modal-dialog">
@@ -109,41 +57,50 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="get">
+                    <form action="" method="get" id="myForm">
                         <div class="form-group">
                             <label for="maBenhNhan">Mã bệnh nhân</label>
-                            <input type="text" class="form-control" name="txtMa" id="maBenhNhan" placeholder="Ma benh nhan" required>
+                            <input type="text" class="form-control" name="txtMa" id="maBenhNhan"
+                                placeholder="Ma benh nhan" required>
+                            <span class="alert-danger" id="error-message-txtMa"></span>
                         </div>
                         <div class="form-group">
                             <label for="matKhau">Mật khẩu</label>
-                            <input type="text" class="form-control" name="txtMK" id="matKhau" placeholder="Mat khau" required>
+                            <input type="text" class="form-control" name="txtMK" id="matKhau" placeholder="Mat khau"
+                                required>
+                            <span class="alert-danger" id="error-message-txtMK"></span>
                         </div>
                         <div class="form-group">
                             <label for="date">Ngày khám</label>
-                            <input type="date" class="form-control" name="date" id="date" placeholder="mm/dd/yyyy" required>
+                            <input type="date" class="form-control" name="date" id="date" placeholder="mm/dd/yyyy"
+                                required>
+                            <span class="alert-danger" id="error-message-date"></span>
                         </div>
-                        <div class="form-check-inline">
-                            <label for="form-check-label">
-                                <input type="checkbox" name="" id="" class="form-check-input" value=""> Khám bệnh theo yêu cầu 
-                            </label>
-                        </div>
-                        <div class="form-check-inline">
-                            <label for="form-check-label">
-                                <input type="checkbox" name="" id="" class="form-check-input" value=""> Điều trị ngoại trú 
-                            </label>
-                        </div>
-                        <div class="form-check-inline">
-                            <label for="form-check-label">
-                                <input type="checkbox" name="" id="" class="form-check-input" value=""> Bác sĩ theo yêu cầu 
-                            </label>
-                        </div>
+                       <div class="form-group">
+                         <label>Loại dịch vụ</label> <br>
+                         <div class="form-check-inline">
+                           <label for="checkbox1" class="form-check-label">
+                             <input type="checkbox" name="kham-benh" id="checkbox1" class="form-check-input" value=""> Khám bệnh theo yêu cầu
+                           </label>
+                         </div>
+                         <div class="form-check-inline">
+                           <label for="checkbox2" class="form-check-label">
+                             <input type="checkbox" name="dieu-tri-ngoai-tru" id="checkbox2" class="form-check-input" value=""> Điều trị ngoại trú
+                           </label>
+                         </div>
+                         <div class="form-check-inline">
+                           <label for="checkbox3" class="form-check-label">
+                             <input type="checkbox" name="bac-si-theo-yeu-cau" id="checkbox3" class="form-check-input" value=""> Bác sĩ theo yêu cầu
+                           </label>
+                         </div>
+                       </div>
+                       
                         <div class="form-group">
                             <label for="sel1">Chuyên khoa</label>
                             <select class="form-control" id="sel1">
-                              <option>Ngoại tổng quát</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
+                                <option>Ngoại tổng quát</option>
+                                <option>Nhi</option>
+                                <option>Nội tổng quát</option>
                             </select>
                         </div>
                         <button class="btn btn-info text-white p-2">Đặt lịch</button>
@@ -155,5 +112,7 @@
             </div>
         </div>
     </div>
+
 </body>
+
 </html>

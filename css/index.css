@@ -1,0 +1,42 @@
+.img {
+    background-image: url(../img/background.jpeg);
+    background-repeat: repeat;
+    background-size: auto;
+    height: 250px;
+    width: 100%;
+
+}
+
+.display-4 {
+    background-color: aquamarine;
+}
+
+.modal-dialog {
+    max-width: 800px;
+}
+
+#btnModal:active {
+    color: rgb(18, 45, 45);
+}
+
+label:not(:has(input)) {
+    font-weight: bold;
+}
+#success-alert {
+  display: none;
+  background-color: #4CAF50;
+  color: #FFF;
+  padding: 10px;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  box-shadow: 0 2px 5px rgba(0,0,0,.3);
+  border-radius: 6px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  text-align: center;
+  z-index: 1; 
+}
+
+  
